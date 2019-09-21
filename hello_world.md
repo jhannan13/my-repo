@@ -22,7 +22,7 @@ us_counties <- us_counties %>%
 plot(us_counties)
 ```
 
-![](hello_world_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](hello_world_files/figure-markdown_github/tigris_map-1.png)
 
 Nice! It looks like we've created the desired outcome so far: a map of US counties we wish to learn more about. Now that we have an SPDF, or SpatialPolygonsDataFrame, it's time to get some data to visualize.
 
@@ -67,7 +67,4 @@ census_sample %>%
 census_sample$GEOID <- paste0(census_sample$state,census_sample$county, sep="")
 #join df
 county_census_spdf <- left_join(x = us_counties, y = census_sample, by = "GEOID")
-plot(county_census_spdf)
 ```
-
-![](hello_world_files/figure-markdown_github/unnamed-chunk-4-1.png)

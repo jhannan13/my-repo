@@ -67,5 +67,4 @@ census_sample %>%
 census_sample$GEOID <- paste0(census_sample$state,census_sample$county, sep="")
 #join df
 county_census_spdf <- left_join(x = us_counties, y = census_sample, by = "GEOID")
-plot(county_census_spdf)
 ```
