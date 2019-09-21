@@ -5,16 +5,13 @@ September 21, 2019
 
 ### About the Census API
 
-The US Census Bureau publishes a wealth of aggregated metrics for several geographic boundaries (e.g., zip codes, census block groups, census tracts) - this information can be used by anyone.
+The US Census Bureau publishes a wealth of aggregated metrics for several geographic boundaries (e.g., zip codes, census block groups, census tracts) - this information can be used by anyone. Additionally, in order to visualize this data, the US Census Bureau offers spatial files at many levels of granularity (see <https://www.census.gov/programs-surveys/geography.html> for more.. The `tigris` package is what we'll start with to find some county level data, and also use `spdplyr` to do some basic filtering on the data frame.
 
 ``` r
-require(censusapi)
 require(tigris)
-require(plotly)
-require(tidyverse)
 require(spdplyr)
 #get US Counties using `tigris`
-us_counties <- counties(state = NULL)
+us_counties <- counties(state = NULL, year = 2017)
 #filter areas not interested via `spdplyr`
 us_counties <- us_counties %>%
   filter(!STATEFP %in% c("02", "15", "66", "72", "69", "78", "60"))
