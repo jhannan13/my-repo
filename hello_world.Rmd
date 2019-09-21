@@ -1,5 +1,5 @@
 ---
-title: "Hello World"
+title: "Hello World 2"
 author: "Jake Hannan"
 date: "September 20, 2019"
 output: 
@@ -19,6 +19,7 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 summary(cars)
+head(cars)
 ```
 
 ## Including Plots
