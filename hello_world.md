@@ -28,7 +28,7 @@ Nice! It looks like we've created the desired outcome so far: a map of US counti
 
 ### The Census API
 
-In order to aptly query the Census Bureau's robust dataset, we'll need to leverage `censusapi`. This package is rather intuitive, and the only additional step needed is to get an API key from the bureau (you can do that [here](https://api.census.gov/data/key_signup.html)). Once you have your key, you can store it as a value like such --
+In order to aptly query the Census Bureau's robust dataset, we'll need to leverage `censusapi`. This package is rather intuitive, and the only additional step needed is to get an API key from the bureau (you can do that [here](https://api.census.gov/data/key_signup.html)). Once you have your key, you can store it as a value like so --
 
 `my_census_key <- ("insert_key_here")`
 
@@ -59,3 +59,15 @@ census_sample %>%
     ##       total
     ##       <dbl>
     ## 1 120048527
+
+120MM is the right number of homes we're looking for within the year's survey, so this looks good! Now we'll need to join this data back to our SPDF, in order to visualize and interact with it.
+
+``` r
+#leverage GEOID as key to join
+census_sample$GEOID <- paste0(census_sample$state,census_sample$county, sep="")
+#join df
+county_census_spdf <- left_join(x = us_counties, y = census_sample, by = "GEOID")
+plot(county_census_spdf)
+```
+
+![](hello_world_files/figure-markdown_github/unnamed-chunk-4-1.png)
