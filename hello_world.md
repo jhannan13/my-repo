@@ -1,44 +1,27 @@
-Hello World 2
+Census Data
 ================
 Jake Hannan
-September 20, 2019
+September 21, 2019
 
-R Markdown
-----------
+### About the Census API
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+The US Census Bureau publishes a wealth of aggregated metrics for several geographic boundaries (e.g., zip codes, census block groups, census tracts) - this information can be used by anyone.
 
 ``` r
-summary(cars)
+require(censusapi)
+require(tigris)
+require(plotly)
+require(tidyverse)
+require(spdplyr)
+#get US Counties using `tigris`
+us_counties <- counties(state = NULL)
+#filter areas not interested via `spdplyr`
+us_counties <- us_counties %>%
+  filter(!STATEFP %in% c("02", "15", "66", "72", "69", "78", "60"))
+#check our work!
+plot(us_counties)
 ```
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+![](hello_world_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
-``` r
-head(cars)
-```
-
-    ##   speed dist
-    ## 1     4    2
-    ## 2     4   10
-    ## 3     7    4
-    ## 4     7   22
-    ## 5     8   16
-    ## 6     9   10
-
-Including Plots
----------------
-
-You can also embed plots, for example:
-
-![](hello_world_files/figure-markdown_github/pressure-1.png)
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Nice! It looks like we've created the desired outcome so far: a map of US counties we wish to learn more about. Now that we have an SPDF, or SpatialPolygonsDataFrame, it's time to get some data to visualize.
