@@ -2,7 +2,9 @@
 title: "Hello World"
 author: "Jake Hannan"
 date: "September 20, 2019"
-output: html_document
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
